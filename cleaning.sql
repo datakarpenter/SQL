@@ -23,3 +23,28 @@ USING (
  ) b
 WHERE a.var1 = b.var1 
  AND a.ctid <> b.ctid
+
+-- Check tabs
+SELECT *
+FROM tbl 
+WHERE (RTRIM(var1) LIKE '%' + CHAR(9) +  '%')
+
+-- Removing non-alphabetical characters
+SELECT regexp_replace(var1, '[^[:alpha:]]', ' ', 'g’)
+FROM tbl
+
+-- Upserting files without UPSERT
+DELETE FROM tbl 
+  USING staging_tbl 
+  WHERE tbl.ID = staging_tbl.ID; 
+
+INSERT INTO tbl 
+SELECT * 
+FROM staging_tbl; 
+
+DELETE FROM staging_tbl
+
+                      
+-- Replace value with string
+UPDATE tbl
+SET var1 = REPLACE(var1, '123\', '')
