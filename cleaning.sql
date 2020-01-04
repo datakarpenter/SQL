@@ -30,7 +30,7 @@ FROM tbl
 WHERE (RTRIM(var1) LIKE '%' + CHAR(9) +  '%')
 
 -- Removing non-alphabetical characters
-SELECT regexp_replace(var1, '[^[:alpha:]]', ' ', 'g’)
+SELECT regexp_replace(var1, '[^[:alpha:]]', ' ', 'g')
 FROM tbl
 
 -- Upserting files without UPSERT
